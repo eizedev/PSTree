@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="Configuration">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="ViewDefinitions">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="View">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="Name" type="xs:string" />
+                                        <xs:element name="ViewSelectedBy">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="TypeName" maxOccurs="unbounded" type="xs:string" />
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                        <xs:element name="TableControl">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="TableHeaders">
+                                                        <xs:complexType>
+                                                            <xs:sequence>
+                                                                <xs:element name="TableColumnHeader" maxOccurs="unbounded">
+                                                                    <xs:complexType>
+                                                                        <xs:sequence>
+                                                                            <xs:element name="Label" type="xs:string" />
+                                                                            <xs:element name="Width" minOccurs="0" type="xs:string" />
+                                                                        </xs:sequence>
+                                                                    </xs:complexType>
+                                                                </xs:element>
+                                                            </xs:sequence>
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                    <xs:element name="TableRowEntries">
+                                                        <xs:complexType>
+                                                            <xs:sequence>
+                                                                <xs:element name="TableRowEntry">
+                                                                    <xs:complexType>
+                                                                        <xs:sequence>
+                                                                            <xs:element name="TableColumnItems">
+                                                                                <xs:complexType>
+                                                                                    <xs:sequence>
+                                                                                        <xs:element name="TableColumnItem" maxOccurs="unbounded">
+                                                                                            <xs:complexType>
+                                                                                                <xs:sequence minOccurs="0">
+                                                                                                    <xs:element name="ScriptBlock" minOccurs="0" type="xs:string" />
+                                                                                                    <xs:element name="PropertyName" minOccurs="0" type="xs:string" />
+                                                                                                </xs:sequence>
+                                                                                            </xs:complexType>
+                                                                                        </xs:element>
+                                                                                    </xs:sequence>
+                                                                                </xs:complexType>
+                                                                            </xs:element>
+                                                                        </xs:sequence>
+                                                                    </xs:complexType>
+                                                                </xs:element>
+                                                            </xs:sequence>
+                                                        </xs:complexType>
+                                                    </xs:element>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

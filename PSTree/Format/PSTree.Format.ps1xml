@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Configuration>
+<Configuration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:noNamespaceSchemaLocation="PSTree.Format.xsd">
     <ViewDefinitions>
         <View>
             <Name>treeview</Name>
@@ -25,7 +26,7 @@
                         <TableColumnItems>
                             <TableColumnItem>
                                 <ScriptBlock>
-                    return $_.Instance.Mode
+                                    return $_.Instance.Mode
                                 </ScriptBlock>
                             </TableColumnItem>
                             <TableColumnItem>
@@ -33,19 +34,19 @@
                             </TableColumnItem>
                             <TableColumnItem>
                                 <ScriptBlock>
-                    # Inspired from https://stackoverflow.com/a/40887001/15339544
+                                    # Inspired from https://stackoverflow.com/a/40887001/15339544
 
-                    $suffix = "B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"
-                    $index  = 0
-                    $length = [int64] $_.Length
+                                    $suffix = "B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"
+                                    $index  = 0
+                                    $length = [int64] $_.Length
 
-                    while ($Length -ge 1kb) {
-                        $Length /= 1kb
-                        $index++
-                    }
-                    return [string]::Format(
-                        '{0} {1}', [math]::Round($Length, 2), $suffix[$index]
-                    )
+                                    while ($Length -ge 1kb) {
+                                        $Length /= 1kb
+                                        $index++
+                                    }
+                                    return [string]::Format(
+                                        '{0} {1}', [math]::Round($Length, 2), $suffix[$index]
+                                    )
                                 </ScriptBlock>
                             </TableColumnItem>
                         </TableColumnItems>
