@@ -52,7 +52,7 @@ https://github.com/santysq/PSTree
 function Get-PSTree
 {
     [cmdletbinding(DefaultParameterSetName = 'Depth')]
-    [alias('gpstree')]
+    [alias('gpstree', 'pstree')]
     param(
         [parameter(Mandatory = $false, Position = 0, ValueFromPipeline)]
         [alias('FullName')]
