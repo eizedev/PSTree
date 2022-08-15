@@ -1,38 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Configuration>
-  <ViewDefinitions>
-    <View>
-      <Name>treeview</Name>
-      <ViewSelectedBy>
-        <TypeName>PSTreeDirectory</TypeName>
-        <TypeName>PSTreeFile</TypeName>
-      </ViewSelectedBy>
-      <TableControl>
-        <TableHeaders>
-          <TableColumnHeader>
-            <Label>Mode</Label>
-            <Width>8</Width>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>Hierarchy</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>Size</Label>
-          </TableColumnHeader>
-        </TableHeaders>
-        <TableRowEntries>
-        <TableRowEntry>
-            <TableColumnItems>
-            <TableColumnItem>
-                <ScriptBlock>
+    <ViewDefinitions>
+        <View>
+            <Name>treeview</Name>
+            <ViewSelectedBy>
+                <TypeName>PSTreeDirectory</TypeName>
+                <TypeName>PSTreeFile</TypeName>
+            </ViewSelectedBy>
+            <TableControl>
+                <TableHeaders>
+                    <TableColumnHeader>
+                        <Label>Mode</Label>
+                        <Width>8</Width>
+                    </TableColumnHeader>
+                    <TableColumnHeader>
+                        <Label>Hierarchy</Label>
+                    </TableColumnHeader>
+                    <TableColumnHeader>
+                        <Label>Size</Label>
+                    </TableColumnHeader>
+                </TableHeaders>
+                <TableRowEntries>
+                    <TableRowEntry>
+                        <TableColumnItems>
+                            <TableColumnItem>
+                                <ScriptBlock>
                     return $_.Instance.Mode
-                </ScriptBlock>
-            </TableColumnItem>
-            <TableColumnItem>
-                <PropertyName>Hierarchy</PropertyName>
-            </TableColumnItem>
-            <TableColumnItem>
-                <ScriptBlock>
+                                </ScriptBlock>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <PropertyName>Hierarchy</PropertyName>
+                            </TableColumnItem>
+                            <TableColumnItem>
+                                <ScriptBlock>
                     # Inspired from https://stackoverflow.com/a/40887001/15339544
 
                     $suffix = "B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB"
@@ -46,12 +46,12 @@
                     return [string]::Format(
                         '{0} {1}', [math]::Round($Length, 2), $suffix[$index]
                     )
-                </ScriptBlock>
-            </TableColumnItem>
-            </TableColumnItems>
-        </TableRowEntry>
-        </TableRowEntries>
-      </TableControl>
-    </View>
-  </ViewDefinitions>
+                                </ScriptBlock>
+                            </TableColumnItem>
+                        </TableColumnItems>
+                    </TableRowEntry>
+                </TableRowEntries>
+            </TableControl>
+        </View>
+    </ViewDefinitions>
 </Configuration>
