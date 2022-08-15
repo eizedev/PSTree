@@ -49,16 +49,14 @@ Gets the hierarchy (excluding files) and folder size of the user directory and a
 https://github.com/santysq/PSTree
 #>
 
-function Get-PSTree
-{
+function Get-PSTree {
     [cmdletbinding(DefaultParameterSetName = 'Depth')]
     [alias('gpstree', 'pstree')]
     param(
         [parameter(Mandatory = $false, Position = 0, ValueFromPipeline)]
         [alias('FullName')]
         [ValidateScript({
-                if (Test-Path $_ -PathType Container)
-                {
+                if (Test-Path $_ -PathType Container) {
                     return $true
                 }
                 throw 'Invalid Folder Path'
@@ -79,42 +77,34 @@ function Get-PSTree
         [switch] $Directory
     )
 
-    begin
-    {
+    begin {
         $Path = $PSCmdlet.GetUnresolvedProviderPathFromPSPath($Path)
     }
 
-    process
-    {
+    process {
         $stack = [Stack[PSTreeDirectory]]::new()
         $stack.Push([PSTreeDirectory]::new($Path, 0))
 
-        $output = while ($stack.Count)
-        {
+        $output = while ($stack.Count) {
             $next = $stack.Pop()
             $level = $next.Depth + 1
             $size = 0
 
-            if ($PSBoundParameters.ContainsKey('Depth') -and $next.Depth -gt $Depth)
-            {
+            if ($PSBoundParameters.ContainsKey('Depth') -and $next.Depth -gt $Depth) {
                 continue
             }
 
-            try
-            {
+            try {
                 $enum = $next.EnumerateFiles()
             }
-            catch
-            {
+            catch {
                 $PSCmdlet.WriteError($_)
                 continue
             }
 
-            $files = foreach ($file in $enum)
-            {
+            $files = foreach ($file in $enum) {
                 $size += $file.Length
-                if ($file.Attributes -band [FileAttributes]'Hidden, System' -and -not $Force.IsPresent)
-                {
+                if ($file.Attributes -band [FileAttributes]'Hidden, System' -and -not $Force.IsPresent) {
                     continue
                 }
                 [PSTreeFile]::new($file, $level)
@@ -124,25 +114,20 @@ function Get-PSTree
             $next.Length = $size
             $next
 
-            if (-not $Directory.IsPresent)
-            {
+            if (-not $Directory.IsPresent) {
                 $files
             }
 
-            try
-            {
+            try {
                 $enum = $next.EnumerateDirectories()
             }
-            catch
-            {
+            catch {
                 $PSCmdlet.WriteError($_)
                 continue
             }
 
-            foreach ($folder in $enum)
-            {
-                if ($folder.Attributes -band [FileAttributes]'Hidden, System' -and -not $Force.IsPresent)
-                {
+            foreach ($folder in $enum) {
+                if ($folder.Attributes -band [FileAttributes]'Hidden, System' -and -not $Force.IsPresent) {
                     continue
                 }
                 $stack.Push([PSTreeDirectory]::new($folder, $level))
